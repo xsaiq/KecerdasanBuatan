@@ -1,28 +1,34 @@
 import nltk
 nltk.download('punkt')
-nltk.download("stopwords")
+nltk.download('stopwords')
 
 !pip install sastrawi
 
-from nltk.probability import FreqDist
-from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from nltk.probability import FreqDist
 
+# 1. text
+text = """
+Setidaknya 112 warga sipil Palestina dilaporkan tewas setelah tentara Israel 
+melepaskan tembakan ke arah kerumunan warga yang sedang berupaya mendapatkan 
+bantuan di Gaza utara, pada Kamis (29/02).
+"""
+
+# 2. word_tokenize
+tokenized_word = word_tokenize(text)
+
+# 3. tokenized_word
 i_stopwords = stopwords.words('indonesian')
+i_filtered_list = [word for word in tokenized_word if word.casefold() not in i_stopwords]
 
-teks = "Seorang pejabat tinggi politik Hamas mengatakan kepada kantor berita AP bahwa pihaknya bersedia menyetujui gencatan senjata selama lima tahun atau lebih dengan Israel dan berubah menjadi partai politik jika negara Palestina merdeka didirikan sesuai Garis Hijau atau perbatasan pra-1967. Pernyataan Khalil al-Hayya dalam wawancara pada hari Rabu (24/4/2024) muncul di tengah kebuntuan pembicaraan gencatan senjata selama berbulan-bulan atas perang di Jalur Gaza. Gagasan Hamas akan melucuti senjatanya dinilai konsesi signifikan dari kelompok militan yang secara resmi berkomitmen menghancurkan Israel."
-
-i_tokenized_word=word_tokenize(teks)
-
-i_filtered_list = []
-for word in i_tokenized_word:
-  if word.casefold() not in i_stopwords:
-    i_filtered_list.append(word)
-
+# 4. i_filtered_list
 factory = StemmerFactory()
-i_stemmer = factory.create_stemmer()
-i_stemmed_words = [i_stemmer.stem(word) for word in i_filtered_list]
+stemmer = factory.create_stemmer()
+i_stemmed_words = [stemmer.stem(word) for word in i_filtered_list]
 
-fdist = FreqDist(lemmatized_words)
-fdist
+# 5. i_stemmed_words
+fdist = FreqDist(i_stemmed_words)
+for word, frequency in fdist.items():
+    print(f"{word}: {frequency}")
