@@ -1,0 +1,37 @@
+import nltk
+from nltk.tokenize import word_tokenize
+
+text1 = "seekor anjing makan daging tadi"
+text2 = "seorang manusia minum air kemaren"
+groucho_grammar = nltk.CFG.fromstring("""
+Kalimat -> Subyek Predikat
+Kalimat -> Subyek Predikat Keterangan
+Subyek -> Determinan KataBenda
+Predikat -> KataKerja KataBenda
+Determinan -> 'seorang' | 'seekor'
+KataBenda -> 'manusia' | 'anjing' | 'nasi' | 'daging' | 'air'
+KataKerja -> 'makan' | 'minum'
+Keterangan -> 'kemaren' | 'tadi'
+""")
+
+'''
+Kalimat: Kalimat
+S: Subyek
+P: predikat
+D: Determinan
+KataBenda: Kata Benda
+KataKerja: Kata Kerja
+Keterangan: Keterangan
+'''
+
+parser = nltk.ChartParser(groucho_grammar)
+
+tokenized_word1 = word_tokenize(text1)
+trees1 = list(parser.parse(tokenized_word1))
+print(trees1[0])
+trees1[0].pretty_print()
+
+tokenized_word2 = word_tokenize(text2)
+trees2 = list(parser.parse(tokenized_word2))
+print(trees2[0])
+trees2[0].pretty_print()
