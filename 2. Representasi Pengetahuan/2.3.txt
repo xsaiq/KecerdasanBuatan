@@ -1,0 +1,28 @@
+cat(sylvestor).
+cat(garfield).
+
+eats(garfield, lasagna).
+eats(X, catfood):-cat(X).
+eats(X, seeds):-bird(X).
+
+mammal(X):-cat(X).
+mammal(X):-dog(X).
+
+pet(X):-cat(X).
+pet(X):-dog(X).
+pet(X):-cannary(X).
+
+has_part(mammal, tail).
+has_part(bird, tail).
+has_part(bird, wing).
+has_part(bird, feather).
+
+animal(X):-mammal(X).
+animal(X):-bird(X).
+
+bird(X):-penguin(X).
+bird(X):-cannary(X).
+penguin(opus).
+cannary(tweety).
+
+can(X, fly):-bird(X), X\=opus.

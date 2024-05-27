@@ -1,0 +1,17 @@
+person(X):-man(X).
+person(X):-woman(X).
+
+man(oscar).
+woman(antje).
+
+married(oscar, antje).
+married(L, P):-married(P, L).
+
+father(oscar, bernd).
+mother(antje, bernd).
+
+cousin(bernd, susi).
+cousin(A, B):-cousin(B, A).
+
+uncle(oscar, susi).
+aunt(antje, susi).

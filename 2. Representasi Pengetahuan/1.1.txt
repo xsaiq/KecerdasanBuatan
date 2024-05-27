@@ -1,0 +1,11 @@
+bawahan_langsung(adi, burhan).
+bawahan_langsung(burhan, bahrun).
+bawahan_langsung(burhan, bisrin).
+bawahan_langsung(bahrun, fahri).
+bawahan_langsung(bahrun, farah).
+bawahan_langsung(bisrin, ferdi).
+
+atasan_langsung(B, A):-bawahan_langsung(A, B).
+
+anak_buah(A, AB):-atasan_langsung(AB, A).
+anak_buah(A, AB):-atasan_langsung(AB, C), anak_buah(A, C).

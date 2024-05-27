@@ -1,0 +1,25 @@
+# DFS - Depth First Search
+
+graph = {
+  'A' : ['B', 'C'],
+  'B' : ['H', 'C'],
+  'H' : ['I', 'C'],
+  'I' : ['C'],
+  'C' : ['D', 'E'],
+  'D' : ['F', 'G'],
+  'F' : ['G', 'E'],
+  'G' : ['E'],
+  'E' : []
+}
+
+visited = set()
+
+def dfs(visited, graph, node):
+    if node not in visited:
+        print (node, end=" ")
+        visited.add(node)
+        for neighbour in graph[node]:
+          dfs(visited, graph, neighbour)
+
+print("Following is the Depth-First Search")
+dfs(visited, graph, 'A')

@@ -1,0 +1,15 @@
+lulusan_sd(anas).
+
+wni(anas).
+
+tahun_lahir(anas, 1962).
+
+umur_sekarang(X, US):-tahun_lahir(X, TL), tahun_sekarang(TS), US is TS-TL.
+umur_daftar(X, UD):-tahun_lahir(X, TL), tahun_daftar(TD), UD is TD-TL.
+pns(X):-wni(X), lulusan_sd(X), umur_daftar(X, UD), UD<35.
+
+tahun_daftar(1990).
+
+pensiun(X):-pns(X), umur_sekarang(X, US), US>=60.
+
+tahun_sekarang(2023).
